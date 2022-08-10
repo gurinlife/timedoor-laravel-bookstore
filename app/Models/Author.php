@@ -14,16 +14,29 @@ class Author extends Model
   public function getAll()
   {
     $data = DB::table('authors')
+              ->select(
+                'id as author_id',
+                'name as author_name'
+              )
+              ->orderBy('author_name')
+              ->get();
+
+    return $data;
+  } 
+
+  public function getAllWithRating()
+  {
+    $data = DB::table('authors')
               ->selectRaw('
                 authors.name as author_name,
-                books.name as book_name, 
                 AVG(ratings.rating) as average_rate,
-                COUNT(*) voter
+                COUNT(*) as voter
               ')
-              ->join('books', 'books.author_id', '=', 'authors.id')
-              ->join('ratings', 'ratings.book_id', '=', 'books.id')
+              ->join('ratings', 'ratings.author_id', '=', 'authors.id')
+              ->where('ratings.rating', '>', 5)
               ->groupBy('authors.id')
               ->orderByDesc('voter')
+              ->limit(10)
               ->get();
 
     return $data;

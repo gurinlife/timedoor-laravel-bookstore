@@ -16,6 +16,9 @@ class Controller extends BaseController {
   public function __construct()
   {
     $this->middleware(function ($request, $next) {
+
+      // initialize default value data
+      $this->data['title']  = env('APP_NAME');
       $this->data['errors'] = [];
 
       return $next($request);

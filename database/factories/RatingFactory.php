@@ -16,9 +16,11 @@ class RatingFactory extends Factory
      */
     public function definition()
     {
+        $book = Book::all()->random();
+
         return [
-            'author_id' => Author::all()->random()->id,
-            'book_id'   => Book::all()->random()->id,
+            'author_id' => $book->author_id,
+            'book_id'   => $book->id,
             'rating'    => $this->faker->randomDigit() + 1
         ];
     }

@@ -34,6 +34,7 @@ class Home extends Controller {
     $search     = $request->input('search', '');
 
     // set data
+    $this->data['title'] = $this->data['title'].' :: Home';
     $this->data['books'] = $mBook->getAll($list_shown, $search);
 
     // set view

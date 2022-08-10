@@ -24,9 +24,8 @@ class Author extends Controller {
     $mAuthor = new AuthorModel();
 
     // set data
-    $this->data['authors'] = $mAuthor->getAll();
-
-    dd($this->data);
+    $this->data['title']   = $this->data['title'].' :: Author';
+    $this->data['authors'] = $mAuthor->getAllWithRating();
 
     // set view
     return view('author.v_index', $this->data);

@@ -33,4 +33,18 @@ class Book extends Model
 
     return $data;
   }
+
+  public function getAllByAuthorId($authorId, $limit = 10)
+  {
+    $data = DB::table('books')
+              ->select(
+                'id as book_id',
+                'name as book_name'
+              )
+              ->where('author_id', $authorId)
+              ->limit($limit)
+              ->get();
+
+    return $data;
+  }
 }
