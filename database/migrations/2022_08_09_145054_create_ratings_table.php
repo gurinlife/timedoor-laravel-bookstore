@@ -15,9 +15,7 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
             $table->foreignId('book_id');
-            $table->foreign('author_id')->references('id')->on('authors');
             $table->foreign('book_id')->references('id')->on('books');
             $table->smallInteger('rating');
             $table->timestamps();
